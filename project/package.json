@@ -22,7 +22,7 @@
     "eslint-plugin-promise": "^5.2.0",
     "ethereum-waffle": "^3.4.0",
     "ethers": "^5.5.3",
-    "hardhat": "^2.8.2",
+    "hardhat": "^2.8.3",
     "hardhat-deploy": "^0.9.26",
     "prettier": "^2.5.1",
     "prettier-plugin-solidity": "^1.0.0-beta.13",
@@ -35,6 +35,7 @@
   "scripts": {
     "compile": "hardhat compile",
     "test": "hardhat test --deploy-fixture",
+    "start:local": "hardhat node",
     "lint:check": "eslint '**/*.{js,ts}'",
     "lint:fix": "eslint '**/*.{js,ts}' --fix",
     "solhint:check": "npx solhint 'contracts/**/*.sol'",
@@ -43,5 +44,8 @@
     "prettier:fix": "prettier '**/*.{json,sol,md}' --write",
     "deploy:ropsten": "hardhat --network ropsten deploy",
     "verify:ropsten": "hardhat --network ropsten etherscan-verify"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.4.2"
   }
 }

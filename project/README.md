@@ -26,9 +26,10 @@ nvm use 16.13.1
 - Sample mnemonic (Get a 12 words mnemonic from [https://iancoleman.io/bip39/](https://iancoleman.io/bip39/) or install Coinbase Wallet from the Corporate App Store.
 
 - Get Ropsten Ether from a faucet:
-    * [https://faucet.egorfine.com](https://faucet.egorfine.com/)
-    * [https://www.moonborrow.com/](https://www.moonborrow.com/) 
-    * [https://faucet.metamask.io/](https://faucet.metamask.io/)
+
+  - [https://faucet.egorfine.com](https://faucet.egorfine.com/)
+  - [https://www.moonborrow.com/](https://www.moonborrow.com/)
+  - [https://faucet.metamask.io/](https://faucet.metamask.io/)
 
 - Get an Etherscan API Key (Check instructions [here](https://docs.etherscan.io/getting-started/viewing-api-usage-statistics))
 
@@ -50,6 +51,8 @@ $ npm install
 $ npm run compile # Compile smart contracts
 
 $ npm run test # Run tests
+
+$ npm run start:local # Run a local testnet
 
 $ npm run lint:check # Check typescript linting
 

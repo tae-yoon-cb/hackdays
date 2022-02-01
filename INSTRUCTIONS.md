@@ -6,7 +6,7 @@ This repository has 3 main things:
 
 - Resources and links
 
-- Boilerplate
+- Project
 
 - Examples
 
@@ -14,10 +14,9 @@ This repository has 3 main things:
 
 Here you will find useful information and external repos to get examples and inspiration.
 
-## Boilerplate
+## Project
 
-A sample boilerplate to start developing smart contracts, you just need to follow the setup instructions but
-everything you need to develop, test, deploy and verify in Etherscan is there.
+Hackday project directory to start developing smart contracts. Follow the setup instructions in README.
 
 ## Examples
 
