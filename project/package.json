@@ -42,7 +42,7 @@
     "solhint:fix": "npx solhint 'contracts/**/*.sol' --fix",
     "prettier:check": "prettier '**/*.{json,sol,md}' --check",
     "prettier:fix": "prettier '**/*.{json,sol,md}' --write",
-    "deploy:ropsten": "hardhat --network ropsten deploy",
+    "deploy:ropsten": "hardhat deploy --network ropsten --export-all './client/src/artifacts/deploys.json'",
     "verify:ropsten": "hardhat --network ropsten etherscan-verify"
   },
   "dependencies": {
