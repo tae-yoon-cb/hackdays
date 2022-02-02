@@ -85,7 +85,7 @@ contract NFTAlbum {
     ) external onlyOwner {
         require(
             collectionByIdExists[_collectionId],
-            "Collection doesn't exists"
+            "Collection doesn't exist"
         );
         collectionItems[_collectionId].push(
             Item(_nftContractAddress, _tokenId)
