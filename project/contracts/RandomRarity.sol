@@ -8,7 +8,10 @@ import "@openzeppelin/contracts/utils/math/SafeCast.sol";
 import "hardhat/console.sol";
 
 /**
-    @dev Simple smart contract that generates rarities
+    @dev Simple smart contract that allows you to create NFT collections.
+    You create the collection and add items (NFTs) to the collection.
+    Then you can query all metadata of a certain collection via 1 call.
+    Notes:
     -   1 NFTAlbum (Owned by a user) -> 1..N Collections
     -   1 Collection -> 1..N Items
  */
@@ -30,6 +33,7 @@ contract RandomRarity is VRFConsumerBase {
     uint constant rareChance = 2200;
     uint constant epicChance = 457;
     uint constant legendaryChance = 12;
+    uint256 constant uint256Max = 2**35 - 1;
 
     /**
      * Constructor inherits VRFConsumerBase
@@ -64,21 +68,26 @@ contract RandomRarity is VRFConsumerBase {
         randomResult = randomness;
     }
 
+    function _random(uint maxNum) internal view returns (uint) {
+        uint randomnumber = uint(keccak256(abi.encodePacked(block.timestamp, msg.sender))) % maxNum;
+        return randomnumber;
+    }
+
     function getRarity(uint8 n)
         external
-        returns (Rarity[] memory rarity)
+        view
+        returns (Rarity[] memory)
     {
-        Rarity[] memory rarities;
+        Rarity[] memory rarities = new Rarity[](n);
         uint c = 0;
-        // randomResult is a 256bit integer - so ~ 77 base 10 units - in order to reduce costs, we can split this number into groups of 5 and get all 10 random numbers
-        // if more than 15 random numbers are needed, we need to request for another number
-
-        uint chainLinkCalls = n / 15 + 1; // e.g. 15 = 0 | 16 = 1 since int division uses floor
-        for (uint i = 0; i < chainLinkCalls; i++) {
-            getRandomNumber();
-            for (uint j = 0; j < 15 || c < n; j++) { // restarts when we have found 15 cards or when N has been met - whichever is first
-                string memory stringInt = Strings.toString(randomResult);
-                string memory sub = substring(stringInt, j*5, j*5+4); // e.g. 0 - 4 | 5 - 9 ... 70 - 74
+        uint rCnt = 0;
+        while (c < n) {
+            console.log("Random call: %s", rCnt);
+            // getRandomNumber();
+            uint r  = _random(uint256Max);
+            for (uint j = 0; r / (10000 ** (j+1))> 10 && c < n; j++) { // restarts when we have found 15 cards or when N has been met - whichever is first ** (j+1)));
+                string memory stringInt = Strings.toString(r); // use randomresult when ready 
+                string memory sub = substring(stringInt, j*4+1, j*4+5); // e.g. 0 - 3 | 4 - 7 ... 72 - 75
 
                 uint256 random5Int = stringToUint(sub);
                 if (random5Int < legendaryChance) {
@@ -92,6 +101,7 @@ contract RandomRarity is VRFConsumerBase {
                 }
                 c++;
             }
+            rCnt++;
         }
         return rarities;
     }
